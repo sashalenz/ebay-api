@@ -1,0 +1,23 @@
+{
+  "inventoryItems": [
+    {
+      "sku": "SKU-001",
+      "product": {
+        "title": "Product 1"
+      },
+      "condition": "NEW"
+    },
+    {
+      "sku": "SKU-002",
+      "product": {
+        "title": "Product 2"
+      },
+      "condition": "USED_EXCELLENT"
+    }
+  ],
+  "total": 2,
+  "href": "https://api.ebay.com/sell/inventory/v1/inventory_item",
+  "limit": 25,
+  "offset": 0
+}
+

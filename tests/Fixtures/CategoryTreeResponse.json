@@ -1,0 +1,32 @@
+{
+  "categoryTreeId": "0",
+  "categoryTreeVersion": "119",
+  "applicableMarketplaceIds": ["EBAY_US"],
+  "rootCategoryNode": {
+    "category": {
+      "categoryId": "0",
+      "categoryName": "Root"
+    },
+    "categoryTreeNodeLevel": 0,
+    "childCategoryTreeNodes": [
+      {
+        "category": {
+          "categoryId": "20081",
+          "categoryName": "Antiques"
+        },
+        "categoryTreeNodeLevel": 1,
+        "leafCategoryTreeNode": false
+      },
+      {
+        "category": {
+          "categoryId": "550",
+          "categoryName": "Art"
+        },
+        "categoryTreeNodeLevel": 1,
+        "leafCategoryTreeNode": false
+      }
+    ],
+    "leafCategoryTreeNode": false
+  }
+}
+

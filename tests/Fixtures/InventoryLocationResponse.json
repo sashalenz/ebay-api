@@ -1,0 +1,21 @@
+{
+  "merchantLocationKey": "warehouse-01",
+  "name": "Main Warehouse",
+  "phone": "+1234567890",
+  "location": {
+    "address": {
+      "addressLine1": "123 Test Street",
+      "city": "San Jose",
+      "stateOrProvince": "CA",
+      "postalCode": "95125",
+      "country": "US"
+    },
+    "geoCoordinates": {
+      "latitude": 37.3382,
+      "longitude": -121.8863
+    }
+  },
+  "locationTypes": ["WAREHOUSE"],
+  "merchantLocationStatus": "ENABLED"
+}
+

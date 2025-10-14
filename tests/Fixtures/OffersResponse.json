@@ -1,0 +1,23 @@
+{
+  "offers": [
+    {
+      "offerId": "offer-001",
+      "sku": "SKU-001",
+      "marketplaceId": "EBAY_US",
+      "format": "FIXED_PRICE",
+      "status": "PUBLISHED"
+    },
+    {
+      "offerId": "offer-002",
+      "sku": "SKU-002",
+      "marketplaceId": "EBAY_US",
+      "format": "FIXED_PRICE",
+      "status": "UNPUBLISHED"
+    }
+  ],
+  "total": 2,
+  "href": "https://api.ebay.com/sell/inventory/v1/offer",
+  "limit": 25,
+  "offset": 0
+}
+

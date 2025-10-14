@@ -1,0 +1,21 @@
+{
+  "offerId": "test-offer-123",
+  "sku": "TEST-SKU-001",
+  "marketplaceId": "EBAY_US",
+  "format": "FIXED_PRICE",
+  "categoryId": "139971",
+  "pricingSummary": {
+    "price": {
+      "value": "99.99",
+      "currency": "USD"
+    }
+  },
+  "listingPolicies": {
+    "fulfillmentPolicyId": "policy-123",
+    "paymentPolicyId": "policy-456",
+    "returnPolicyId": "policy-789"
+  },
+  "status": "PUBLISHED",
+  "listingId": "listing-123"
+}
+

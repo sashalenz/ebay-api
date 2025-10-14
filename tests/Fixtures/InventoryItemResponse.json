@@ -1,0 +1,22 @@
+{
+  "sku": "TEST-SKU-001",
+  "product": {
+    "title": "Test Product Title",
+    "description": "Test product description",
+    "brand": "Test Brand",
+    "mpn": "TEST-MPN-001",
+    "aspects": {
+      "Brand": ["Test Brand"],
+      "Model": ["Test Model"]
+    },
+    "imageUrls": ["https://example.com/image1.jpg"]
+  },
+  "condition": "NEW",
+  "availability": {
+    "shipToLocationAvailability": {
+      "quantity": 10
+    }
+  },
+  "locale": "en_US"
+}
+

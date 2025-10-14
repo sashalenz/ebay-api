@@ -1,0 +1,18 @@
+{
+  "categorySuggestions": [
+    {
+      "category": {
+        "categoryId": "9355",
+        "categoryName": "Cell Phones & Smartphones"
+      },
+      "categoryTreeNodeAncestors": [
+        {
+          "categoryId": "15032",
+          "categoryName": "Cell Phones & Accessories"
+        }
+      ],
+      "relevancy": "100"
+    }
+  ]
+}
+
