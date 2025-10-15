@@ -2,6 +2,39 @@
 
 All notable changes to `ebay-api` will be documented in this file.
 
+## 3.1.0 - 2025-10-15
+
+### Added
+- **🔐 Marketplace Account Deletion Endpoint (GDPR Compliance)**
+  - Separate HTTP endpoint for account deletion notifications (required by eBay)
+  - Verification challenge/response mechanism (32-80 char token)
+  - `MarketplaceAccountDeletionController` - Handles GET (verification) and POST (deletion) requests
+  - `MarketplaceAccountDeletionNotificationEvent` - Laravel event for deletion notifications
+  - `ProcessMarketplaceAccountDeletionJob` - Async queue job for processing
+  - Configuration: `marketplace_account_deletion` section in `config/ebay-api.php`
+  - Environment variables: `EBAY_MAD_*` for configuration
+  - Full documentation with setup, testing, and GDPR compliance examples
+  - **Documentation**: https://developer.ebay.com/marketplace-account-deletion
+
+### Configuration
+New environment variables:
+- `EBAY_MAD_ENABLED` - Enable/disable endpoint (default: false)
+- `EBAY_MAD_ROUTE` - Route path (default: ebay/account-deletion)
+- `EBAY_MAD_VERIFICATION_TOKEN` - 32-80 character token (required)
+- `EBAY_MAD_QUEUE` - Queue name for async processing (default: default)
+- `EBAY_MAD_STORE_DB` - Store notifications in database (default: true)
+
+### Difference from Platform Notifications
+- Platform Notifications: SOAP XML, 10+ events, POST only, MD5 signature
+- Account Deletion: JSON HTTP, 1 event, GET+POST, challenge/response verification
+- Both systems coexist for complete eBay integration
+
+### Summary
+- **Total Controllers**: 2 (NotificationController + MarketplaceAccountDeletionController)
+- **Total Events**: 11 (10 Platform + 1 Account Deletion)
+- **Total Jobs**: 2 (ProcessEbayNotificationJob + ProcessMarketplaceAccountDeletionJob)
+- GDPR-compliant with mandatory user data deletion handling
+
 ## 3.0.0 - 2025-10-14
 
 ### Added

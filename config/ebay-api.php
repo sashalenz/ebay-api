@@ -62,4 +62,32 @@ return [
         'signature_tolerance_minutes' => 10,
     ],
 
+    /**
+     * Marketplace Account Deletion Notifications (GDPR Compliance)
+     * Configure endpoint for receiving marketplace account deletion notifications
+     *
+     * @see https://developer.ebay.com/marketplace-account-deletion
+     */
+    'marketplace_account_deletion' => [
+        'enabled' => env('EBAY_MAD_ENABLED', false),
+        'route_path' => env('EBAY_MAD_ROUTE', 'ebay/account-deletion'),
+
+        /**
+         * Verification Token (32-80 characters)
+         * Required for endpoint validation by eBay.
+         * Generate a secure random token: openssl rand -base64 48
+         */
+        'verification_token' => env('EBAY_MAD_VERIFICATION_TOKEN'),
+
+        /**
+         * Queue for async processing of deletion notifications
+         */
+        'queue' => env('EBAY_MAD_QUEUE', 'default'),
+
+        /**
+         * Store deletion notifications in database
+         */
+        'store_in_database' => env('EBAY_MAD_STORE_DB', true),
+    ],
+
 ];

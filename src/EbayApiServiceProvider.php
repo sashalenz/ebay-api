@@ -9,6 +9,7 @@ use Sashalenz\EbayApi\Client\EbayClient;
 use Sashalenz\EbayApi\Enums\ContentLanguage;
 use Sashalenz\EbayApi\Enums\Environment;
 use Sashalenz\EbayApi\Enums\MarketplaceId;
+use Sashalenz\EbayApi\Http\Controllers\MarketplaceAccountDeletionController;
 use Sashalenz\EbayApi\Http\Controllers\NotificationController;
 use Sashalenz\EbayApi\Services\NotificationParser;
 use Spatie\LaravelPackageTools\Package;
@@ -78,6 +79,15 @@ class EbayApiServiceProvider extends PackageServiceProvider
                 config('ebay-api.notifications.route_path', 'ebay/notifications'),
                 NotificationController::class
             )->name('ebay-api.notifications');
+        }
+
+        // Register marketplace account deletion endpoint if enabled
+        if (config('ebay-api.marketplace_account_deletion.enabled', false)) {
+            Route::match(
+                ['get', 'post'],
+                config('ebay-api.marketplace_account_deletion.route_path', 'ebay/account-deletion'),
+                MarketplaceAccountDeletionController::class
+            )->name('ebay-api.marketplace-account-deletion');
         }
     }
 }

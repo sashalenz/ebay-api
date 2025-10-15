@@ -1329,6 +1329,229 @@ foreach ($failedNotifications as $notification) {
 }
 ```
 
+## Marketplace Account Deletion (GDPR Compliance)
+
+In addition to Platform Notifications, eBay requires a separate HTTP endpoint for marketplace account deletion notifications. This is an additional GDPR compliance requirement.
+
+**Documentation**: https://developer.ebay.com/marketplace-account-deletion
+
+### Setup
+
+1. **Enable the endpoint** in `.env`:
+
+```env
+EBAY_MAD_ENABLED=true
+EBAY_MAD_ROUTE=ebay/account-deletion
+EBAY_MAD_VERIFICATION_TOKEN=your-secure-token-32-80-chars
+EBAY_MAD_QUEUE=default
+EBAY_MAD_STORE_DB=true
+```
+
+2. **Generate verification token** (32-80 characters required):
+
+```bash
+openssl rand -base64 48
+```
+
+Copy the generated token to `EBAY_MAD_VERIFICATION_TOKEN` in `.env`.
+
+3. **Register endpoint in eBay Developer Portal:**
+   - Go to: https://developer.ebay.com/my/auth/?tab=marketplaceAccountDeletion
+   - Enter your endpoint URL: `https://your-domain.com/ebay/account-deletion`
+   - eBay will send a verification challenge to validate your endpoint
+
+### How it Works
+
+The endpoint handles two types of requests:
+
+#### 1. Verification Challenge (GET)
+
+eBay sends a GET request with `challenge_code` parameter:
+
+```
+GET https://your-domain.com/ebay/account-deletion?challenge_code=ABC123...
+```
+
+The controller automatically calculates and returns:
+
+```json
+{
+  "challengeResponse": "hash(challenge_code + verification_token + endpoint_url)"
+}
+```
+
+#### 2. Deletion Notification (POST)
+
+eBay sends a POST request when a user deletes their marketplace account:
+
+```json
+{
+  "metadata": {
+    "topic": "MARKETPLACE_ACCOUNT_DELETION",
+    "schemaVersion": "1.0"
+  },
+  "notification": {
+    "notificationId": "...",
+    "eventDate": "2025-10-15T12:34:56.000Z",
+    "data": {
+      "username": "buyer123",
+      "userId": "U123456789",
+      "eiasToken": "..."
+    }
+  }
+}
+```
+
+### Listening to Deletion Notifications
+
+Register listener in your `EventServiceProvider`:
+
+```php
+use Sashalenz\EbayApi\Events\Notifications\MarketplaceAccountDeletionNotificationEvent;
+
+protected $listen = [
+    MarketplaceAccountDeletionNotificationEvent::class => [
+        DeleteUserEbayData::class,
+    ],
+];
+```
+
+### Event Handler Example
+
+**CRITICAL**: You MUST delete or anonymize all user data to comply with GDPR:
+
+```php
+namespace App\Listeners;
+
+use Sashalenz\EbayApi\Events\Notifications\MarketplaceAccountDeletionNotificationEvent;
+use Illuminate\Support\Facades\Log;
+use App\Models\User;
+
+class DeleteUserEbayData
+{
+    public function handle(MarketplaceAccountDeletionNotificationEvent $event): void
+    {
+        $username = $event->getUsername();
+        $userId = $event->getUserId();
+
+        // Find user by eBay user ID
+        $user = User::where('ebay_user_id', $userId)->first();
+
+        if ($user) {
+            // Delete or anonymize all eBay-related data
+            $user->orders()->where('source', 'ebay')->delete();
+            $user->ebay_listings()->delete();
+            $user->ebay_transactions()->delete();
+            
+            // Anonymize user data
+            $user->update([
+                'ebay_user_id' => null,
+                'ebay_username' => null,
+                'ebay_access_token' => null,
+                'ebay_refresh_token' => null,
+            ]);
+
+            Log::info('User eBay data deleted for GDPR compliance', [
+                'username' => $username,
+                'user_id' => $userId,
+                'notification_id' => $event->notification->notification_id,
+            ]);
+        }
+    }
+}
+```
+
+### Testing the Endpoint
+
+**1. Test verification challenge:**
+
+```bash
+curl "https://your-domain.com/ebay/account-deletion?challenge_code=TEST123"
+```
+
+Expected response:
+
+```json
+{
+  "challengeResponse": "abc123..."
+}
+```
+
+**2. Test deletion notification (POST):**
+
+```bash
+curl -X POST https://your-domain.com/ebay/account-deletion \
+  -H "Content-Type: application/json" \
+  -d '{
+    "notification": {
+      "notificationId": "test-123",
+      "data": {
+        "username": "testuser",
+        "userId": "U12345"
+      }
+    }
+  }'
+```
+
+Expected response:
+
+```json
+{
+  "status": "accepted"
+}
+```
+
+### Queue Processing
+
+Deletion notifications are processed asynchronously via queue jobs:
+
+```php
+use Sashalenz\EbayApi\Jobs\ProcessMarketplaceAccountDeletionJob;
+
+// Manually dispatch job
+ProcessMarketplaceAccountDeletionJob::dispatch($notificationId);
+
+// Check queue status
+php artisan queue:work --queue=default
+```
+
+### Database Storage
+
+If `EBAY_MAD_STORE_DB=true`, notifications are stored in `ebay_notifications` table with:
+
+- `event_name`: `MARKETPLACE_ACCOUNT_DELETION`
+- `notification_id`: eBay notification ID
+- `recipient_user_id`: eBay user ID
+- `payload`: Full JSON payload
+- `processed`: Boolean flag
+
+### Security Notes
+
+1. **Verification Token**:
+   - Must be 32-80 characters
+   - Keep it secure (never commit to version control)
+   - Use strong random generation: `openssl rand -base64 48`
+
+2. **HTTPS Required**:
+   - eBay only sends requests to HTTPS endpoints
+   - Ensure your SSL certificate is valid
+
+3. **Endpoint Validation**:
+   - eBay validates your endpoint before activation
+   - Ensure verification token is configured before registering
+
+### Difference from Platform Notifications
+
+| Feature | Platform Notifications | Account Deletion |
+|---------|----------------------|------------------|
+| Protocol | SOAP XML | JSON HTTP |
+| Events | 10+ event types | 1 event type only |
+| Request Type | POST only | GET (challenge) + POST |
+| Verification | MD5 signature | Challenge/response |
+| Purpose | Real-time events | GDPR compliance |
+
+Both systems can coexist - use Platform Notifications for operational events and Account Deletion endpoint for GDPR compliance.
+
 ## Post-Order API Examples
 
 ⚠️ **Important**: Post-Order API requires User OAuth Token. Set it before making requests:
