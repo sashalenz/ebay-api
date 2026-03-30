@@ -64,12 +64,12 @@ class CreateOfferRequest extends Request
 
     protected ?bool $hideBuyerDetails = null;
 
-    public function __construct(?EbayClient $client, string $sku, MarketplaceId $marketplaceId, OfferFormat $format)
+    public function __construct(?EbayClient $client, string $sku, MarketplaceId $marketplaceId, OfferFormat|string $format)
     {
         parent::__construct($client);
         $this->sku = $sku;
         $this->marketplaceId = $marketplaceId;
-        $this->format = $format;
+        $this->format = is_string($format) ? OfferFormat::from($format) : $format;
     }
 
     public function availableQuantity(int $availableQuantity): self
@@ -311,7 +311,7 @@ class CreateOfferRequest extends Request
         return $body;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return OfferData::class;
     }

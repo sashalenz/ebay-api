@@ -39,7 +39,7 @@ class BulkPublishOfferRequest extends Request
      */
     public function offerIds(array $offerIds): self
     {
-        $this->offerIds = $offerIds;
+        $this->offerIds = array_merge($this->offerIds, $offerIds);
 
         return $this;
     }

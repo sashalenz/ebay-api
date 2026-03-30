@@ -89,7 +89,7 @@ class FindListingRecommendationsRequest extends Request
         return $body;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return PagedListingRecommendationCollectionData::class;
     }

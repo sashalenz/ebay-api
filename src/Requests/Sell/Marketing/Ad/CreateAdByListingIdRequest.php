@@ -41,7 +41,7 @@ class CreateAdByListingIdRequest extends Request
         return $this->adData;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return AdData::class;
     }

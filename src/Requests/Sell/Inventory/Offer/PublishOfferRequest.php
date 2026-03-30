@@ -33,7 +33,7 @@ class PublishOfferRequest extends Request
         return 'POST';
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return PublishResponseData::class;
     }

@@ -30,7 +30,7 @@ class GetSellerFundsSummaryRequest extends Request
         return 'GET';
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return SellerFundsSummaryData::class;
     }

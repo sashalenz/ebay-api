@@ -41,12 +41,12 @@ class GetFulfillmentPoliciesRequest extends Request
         ];
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return FulfillmentPoliciesData::class;
     }
 
-    protected function dtoKey(): ?string
+    public function dtoKey(): ?string
     {
         return 'fulfillmentPolicies';
     }

@@ -40,7 +40,7 @@ class BulkMigrateListingRequest extends Request
      */
     public function listingIds(array $listingIds): self
     {
-        $this->listingIds = $listingIds;
+        $this->listingIds = array_merge($this->listingIds, $listingIds);
 
         return $this;
     }
@@ -78,7 +78,7 @@ class BulkMigrateListingRequest extends Request
         ];
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return BulkMigrateListingResponseData::class;
     }

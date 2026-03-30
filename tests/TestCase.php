@@ -7,6 +7,12 @@ namespace Sashalenz\EbayApi\Tests;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Sashalenz\EbayApi\EbayApiServiceProvider;
 use Sashalenz\EbayApi\Tests\Concerns\MocksApiResponses;
+use Spatie\LaravelData\LaravelDataServiceProvider;
+use Spatie\LaravelData\Normalizers\ArrayableNormalizer;
+use Spatie\LaravelData\Normalizers\ArrayNormalizer;
+use Spatie\LaravelData\Normalizers\JsonNormalizer;
+use Spatie\LaravelData\Normalizers\ModelNormalizer;
+use Spatie\LaravelData\Normalizers\ObjectNormalizer;
 
 /**
  * Base Test Case
@@ -34,6 +40,7 @@ class TestCase extends Orchestra
     {
         return [
             EbayApiServiceProvider::class,
+            LaravelDataServiceProvider::class,
         ];
     }
 
@@ -49,5 +56,22 @@ class TestCase extends Orchestra
         config()->set('ebay-api.environment', 'sandbox');
         config()->set('ebay-api.marketplace_id', 'EBAY_US');
         config()->set('ebay-api.content_language', 'en-US');
+        // Load Spatie Data default config and adjust for tests
+        $spatieDataConfigPath = base_path('vendor/spatie/laravel-data/config/data.php');
+        if (file_exists($spatieDataConfigPath)) {
+            $dataConfig = require $spatieDataConfigPath;
+            $dataConfig['validation_strategy'] = 'disabled';
+            config()->set('data', $dataConfig);
+        } else {
+            // Fallback minimal config: use the common Spatie normalizers
+            config()->set('data.validation_strategy', 'disabled');
+            config()->set('data.normalizers', [
+                ModelNormalizer::class,
+                ArrayableNormalizer::class,
+                ObjectNormalizer::class,
+                ArrayNormalizer::class,
+                JsonNormalizer::class,
+            ]);
+        }
     }
 }

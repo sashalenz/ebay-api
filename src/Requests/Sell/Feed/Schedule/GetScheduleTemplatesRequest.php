@@ -68,12 +68,12 @@ class GetScheduleTemplatesRequest extends Request
         return $query;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return ScheduleTemplateCollectionData::class;
     }
 
-    protected function dtoKey(): ?string
+    public function dtoKey(): ?string
     {
         return 'scheduleTemplates';
     }

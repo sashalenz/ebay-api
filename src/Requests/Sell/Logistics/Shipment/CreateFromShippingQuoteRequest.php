@@ -98,7 +98,7 @@ class CreateFromShippingQuoteRequest extends Request
         return $body;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return ShipmentData::class;
     }

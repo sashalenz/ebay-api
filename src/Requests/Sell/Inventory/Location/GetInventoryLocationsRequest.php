@@ -57,7 +57,7 @@ class GetInventoryLocationsRequest extends Request
         return $query;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return InventoryLocationsData::class;
     }

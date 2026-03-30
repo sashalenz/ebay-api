@@ -54,7 +54,7 @@ class CreateFulfillmentPolicyRequest extends Request
         ], $this->data);
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return FulfillmentPolicyData::class;
     }

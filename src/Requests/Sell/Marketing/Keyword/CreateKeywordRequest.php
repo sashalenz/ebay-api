@@ -39,7 +39,7 @@ class CreateKeywordRequest extends Request
         return $this->keywordData;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return KeywordData::class;
     }

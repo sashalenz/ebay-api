@@ -41,12 +41,12 @@ class GetReturnPoliciesRequest extends Request
         ];
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return ReturnPoliciesData::class;
     }
 
-    protected function dtoKey(): ?string
+    public function dtoKey(): ?string
     {
         return 'returnPolicies';
     }

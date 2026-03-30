@@ -33,7 +33,7 @@ class GetFulfillmentPolicyRequest extends Request
         return 'GET';
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return FulfillmentPolicyData::class;
     }

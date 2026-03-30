@@ -41,12 +41,12 @@ class SearchProductsRequest extends Request
     /**
      * Set the query string (general search term)
      */
-    public function query(string $q): self
-    {
-        $this->q = $q;
+    // public function q(string $q): self
+    // {
+    //     $this->q = $q;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * Set the GTIN (UPC, EAN, ISBN)
@@ -138,6 +138,13 @@ class SearchProductsRequest extends Request
         return 'GET';
     }
 
+    public function q(string $q): self
+    {
+        $this->q = $q;
+
+        return $this;
+    }
+
     public function query(): array
     {
         $query = [];
@@ -181,12 +188,12 @@ class SearchProductsRequest extends Request
         return $query;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return ProductSearchResponseData::class;
     }
 
-    protected function dtoKey(): ?string
+    public function dtoKey(): ?string
     {
         return 'productSummaries';
     }

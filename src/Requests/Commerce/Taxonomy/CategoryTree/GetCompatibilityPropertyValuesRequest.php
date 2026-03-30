@@ -47,9 +47,17 @@ class GetCompatibilityPropertyValuesRequest extends Request
      * @param  string  $property  The property name
      * @param  string  $value  The property value
      */
-    public function filter(string $property, string $value): self
+    public function filter(string $propertyOrPair, ?string $value = null): self
     {
-        $this->filters[$property] = $value;
+        if ($value === null && str_contains($propertyOrPair, ':')) {
+            [$property, $val] = explode(':', $propertyOrPair, 2);
+            $this->filters[$property] = $val;
+        } elseif ($value !== null) {
+            $this->filters[$propertyOrPair] = $value;
+        } else {
+            // If value is missing and no colon present, set empty string
+            $this->filters[$propertyOrPair] = '';
+        }
 
         return $this;
     }

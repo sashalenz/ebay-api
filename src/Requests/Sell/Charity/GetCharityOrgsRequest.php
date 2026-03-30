@@ -31,7 +31,7 @@ class GetCharityOrgsRequest extends Request
     /**
      * Set the search query string
      */
-    public function query(string $q): self
+    public function q(string $q): self
     {
         $this->q = $q;
 
@@ -101,12 +101,12 @@ class GetCharityOrgsRequest extends Request
         return $query;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return CharityOrgsData::class;
     }
 
-    protected function dtoKey(): ?string
+    public function dtoKey(): ?string
     {
         return 'charityOrgs';
     }

@@ -33,12 +33,12 @@ class GetShippingFulfillmentsRequest extends Request
         return 'GET';
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return ShippingFulfillmentsData::class;
     }
 
-    protected function dtoKey(): ?string
+    public function dtoKey(): ?string
     {
         return 'fulfillments';
     }

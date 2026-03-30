@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Sashalenz\EbayApi\Requests\Sell\Marketing\Campaign;
 
 use Sashalenz\EbayApi\Client\EbayClient;
-use Sashalenz\EbayApi\Data\Sell\Marketing\CampaignsData;
+use Sashalenz\EbayApi\Data\Sell\Marketing\CampaignData;
 use Sashalenz\EbayApi\Requests\Request;
 
 /**
@@ -76,12 +76,12 @@ class FindCampaignByAdReferenceRequest extends Request
         return $query;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
-        return CampaignsData::class;
+        return CampaignData::class;
     }
 
-    protected function dtoKey(): ?string
+    public function dtoKey(): ?string
     {
         return 'campaigns';
     }

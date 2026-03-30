@@ -33,7 +33,7 @@ class GetImageRequest extends Request
         return 'GET';
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return ImageData::class;
     }

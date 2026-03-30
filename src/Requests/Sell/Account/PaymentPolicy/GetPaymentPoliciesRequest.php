@@ -41,12 +41,12 @@ class GetPaymentPoliciesRequest extends Request
         ];
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return PaymentPoliciesData::class;
     }
 
-    protected function dtoKey(): ?string
+    public function dtoKey(): ?string
     {
         return 'paymentPolicies';
     }

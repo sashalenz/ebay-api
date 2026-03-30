@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sashalenz\EbayApi\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,14 +17,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $event_name
  * @property string $recipient_user_id
  * @property string $notification_signature
- * @property \Carbon\Carbon $timestamp
+ * @property Carbon $timestamp
  * @property string|null $correlation_id
  * @property array $payload
- * @property \Carbon\Carbon|null $processed_at
+ * @property Carbon|null $processed_at
  * @property string $processing_status
  * @property string|null $error_message
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class EbayNotification extends Model
 {

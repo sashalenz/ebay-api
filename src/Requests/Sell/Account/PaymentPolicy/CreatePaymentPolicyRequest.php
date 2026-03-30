@@ -54,7 +54,7 @@ class CreatePaymentPolicyRequest extends Request
         ], $this->data);
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return PaymentPolicyData::class;
     }

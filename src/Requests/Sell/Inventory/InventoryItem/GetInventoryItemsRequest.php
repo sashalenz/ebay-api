@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Sashalenz\EbayApi\Requests\Sell\Inventory\InventoryItem;
 
 use Sashalenz\EbayApi\Client\EbayClient;
-use Sashalenz\EbayApi\Data\Sell\Inventory\InventoryItemData;
 use Sashalenz\EbayApi\Requests\Request;
 
 /**
@@ -92,18 +91,10 @@ class GetInventoryItemsRequest extends Request
     /**
      * Get the Data class for automatic response mapping
      *
-     * @return class-string<InventoryItemData>
+     * @return class-string<InventoryItemsData>
      */
     public function dto(): string
     {
-        return InventoryItemData::class;
-    }
-
-    /**
-     * Get the key to extract from response before mapping to Data
-     */
-    public function dtoKey(): string
-    {
-        return 'inventoryItems';
+        return \Sashalenz\EbayApi\Data\Sell\Inventory\InventoryItemsData::class;
     }
 }
