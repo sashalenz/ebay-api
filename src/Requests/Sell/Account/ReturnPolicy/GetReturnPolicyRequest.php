@@ -33,7 +33,7 @@ class GetReturnPolicyRequest extends Request
         return 'GET';
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return ReturnPolicyData::class;
     }

@@ -41,7 +41,7 @@ class CreateAdsByInventoryReferenceRequest extends Request
         return ['inventoryReferences' => $this->inventoryReferences];
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return AdsData::class;
     }

@@ -53,7 +53,7 @@ class GetOrderRequest extends Request
         return $query;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return OrderData::class;
     }

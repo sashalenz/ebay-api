@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use Illuminate\Support\Facades\Cache;
 use Sashalenz\EbayApi\Client\EbayClient;
 use Sashalenz\EbayApi\Enums\ContentLanguage;
 use Sashalenz\EbayApi\Enums\Environment;
@@ -65,6 +66,11 @@ trait MocksApiResponses
         $mock = new MockHandler($responses);
         $handlerStack = HandlerStack::create($mock);
         $guzzleClient = new Client(['handler' => $handlerStack]);
+
+        // Seed the application token cache so tests don't perform a real network
+        // request when ApplicationToken::getToken() is called.
+        $cacheKey = 'ebay_api_app_token_'.md5('test_app_id'.Environment::SANDBOX->value);
+        Cache::put($cacheKey, 'test_app_token', 3300);
 
         return new EbayClient(
             appId: 'test_app_id',

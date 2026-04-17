@@ -50,7 +50,7 @@ class GetPayoutSummaryRequest extends Request
         return $query;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return PayoutSummaryData::class;
     }

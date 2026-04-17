@@ -45,7 +45,7 @@ class GetPaymentPolicyByNameRequest extends Request
         ];
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return PaymentPolicyData::class;
     }

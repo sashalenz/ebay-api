@@ -41,7 +41,7 @@ class CloneCampaignRequest extends Request
         return $this->cloneData;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return CampaignData::class;
     }

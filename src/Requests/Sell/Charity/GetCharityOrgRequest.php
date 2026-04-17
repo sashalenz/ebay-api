@@ -33,7 +33,7 @@ class GetCharityOrgRequest extends Request
         return 'GET';
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return CharityOrgData::class;
     }

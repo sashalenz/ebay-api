@@ -47,12 +47,12 @@ class GetAdsByInventoryReferenceRequest extends Request
         ];
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return AdsData::class;
     }
 
-    protected function dtoKey(): ?string
+    public function dtoKey(): ?string
     {
         return 'ads';
     }

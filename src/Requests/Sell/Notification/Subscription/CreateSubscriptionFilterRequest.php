@@ -47,7 +47,7 @@ class CreateSubscriptionFilterRequest extends Request
         ];
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return SubscriptionFilterData::class;
     }

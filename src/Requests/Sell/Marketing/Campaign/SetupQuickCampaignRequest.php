@@ -38,7 +38,7 @@ class SetupQuickCampaignRequest extends Request
         return $this->quickCampaignData;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return CampaignData::class;
     }

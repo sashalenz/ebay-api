@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Sashalenz\EbayApi\Requests\Sell\Metadata\Country;
 
 use Sashalenz\EbayApi\Client\EbayClient;
-use Sashalenz\EbayApi\Data\Sell\Metadata\SalesTaxJurisdictionData;
 use Sashalenz\EbayApi\Requests\Request;
 
 /**
@@ -33,12 +32,7 @@ class GetSalesTaxJurisdictionsRequest extends Request
         return 'GET';
     }
 
-    protected function dto(): ?string
-    {
-        return SalesTaxJurisdictionData::class;
-    }
-
-    protected function dtoKey(): ?string
+    public function dtoKey(): ?string
     {
         return 'salesTaxJurisdictions';
     }

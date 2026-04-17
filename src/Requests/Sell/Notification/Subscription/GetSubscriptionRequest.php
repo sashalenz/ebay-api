@@ -33,7 +33,7 @@ class GetSubscriptionRequest extends Request
         return 'GET';
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return SubscriptionData::class;
     }

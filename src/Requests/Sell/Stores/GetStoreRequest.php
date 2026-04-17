@@ -26,7 +26,7 @@ class GetStoreRequest extends Request
         return 'GET';
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return StoreData::class;
     }

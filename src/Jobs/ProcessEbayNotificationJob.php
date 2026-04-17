@@ -11,6 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Sashalenz\EbayApi\Enums\NotificationEventType;
+use Sashalenz\EbayApi\Events\EbayNotificationReceived;
 use Sashalenz\EbayApi\Models\EbayNotification;
 use Sashalenz\EbayApi\Services\NotificationParser;
 
@@ -70,7 +71,7 @@ class ProcessEbayNotificationJob implements ShouldQueue
                 ));
             } else {
                 // Dispatch generic event
-                event(new \Sashalenz\EbayApi\Events\EbayNotificationReceived(
+                event(new EbayNotificationReceived(
                     $notification,
                     $notification->event_name,
                     $notification->payload

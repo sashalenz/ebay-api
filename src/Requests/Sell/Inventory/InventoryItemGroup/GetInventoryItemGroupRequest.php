@@ -35,7 +35,7 @@ class GetInventoryItemGroupRequest extends Request
         return 'GET';
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return InventoryItemGroupData::class;
     }

@@ -44,7 +44,7 @@ class CreateDestinationRequest extends Request
         ];
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return DestinationData::class;
     }

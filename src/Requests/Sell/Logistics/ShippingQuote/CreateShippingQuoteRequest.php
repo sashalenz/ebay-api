@@ -76,7 +76,7 @@ class CreateShippingQuoteRequest extends Request
         ];
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return ShippingQuoteData::class;
     }

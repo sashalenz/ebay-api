@@ -21,7 +21,7 @@ class InventoryLocationData extends Data
         public ?string $name = null,
         public ?string $phone = null,
         public ?LocationData $location = null,
-        public ?string $locationTypes = null,
+        public ?array $locationTypes = null,
         public ?string $locationWebUrl = null,
         public ?string $locationInstructions = null,
         #[DataCollectionOf(OperatingHoursData::class)]

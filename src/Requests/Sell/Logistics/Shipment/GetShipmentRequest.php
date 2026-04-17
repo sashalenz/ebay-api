@@ -33,7 +33,7 @@ class GetShipmentRequest extends Request
         return 'GET';
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return ShipmentData::class;
     }

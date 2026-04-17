@@ -38,7 +38,7 @@ class CreateCampaignRequest extends Request
         return $this->campaignData;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return CampaignData::class;
     }

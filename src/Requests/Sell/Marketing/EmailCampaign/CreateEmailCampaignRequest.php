@@ -33,7 +33,7 @@ class CreateEmailCampaignRequest extends Request
         return $this->emailCampaignData;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return EmailCampaignData::class;
     }

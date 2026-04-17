@@ -4,6 +4,17 @@ declare(strict_types=1);
 
 namespace Sashalenz\EbayApi\Enums;
 
+use Sashalenz\EbayApi\Events\Notifications\BuyerRequestedPurchaseQuoteEvent;
+use Sashalenz\EbayApi\Events\Notifications\FeedbackReceivedEvent;
+use Sashalenz\EbayApi\Events\Notifications\ItemAvailabilityEvent;
+use Sashalenz\EbayApi\Events\Notifications\ItemEndedEvent;
+use Sashalenz\EbayApi\Events\Notifications\ItemListedEvent;
+use Sashalenz\EbayApi\Events\Notifications\ItemRevisedEvent;
+use Sashalenz\EbayApi\Events\Notifications\ItemSoldEvent;
+use Sashalenz\EbayApi\Events\Notifications\MarketplaceAccountDeletionEvent;
+use Sashalenz\EbayApi\Events\Notifications\OrderCancelledEvent;
+use Sashalenz\EbayApi\Events\Notifications\OrderCreatedEvent;
+
 /**
  * Notification Event Type
  *
@@ -90,16 +101,16 @@ enum NotificationEventType: string
     public function getEventClass(): ?string
     {
         return match ($this) {
-            self::ITEM_LISTED => \Sashalenz\EbayApi\Events\Notifications\ItemListedEvent::class,
-            self::ITEM_SOLD => \Sashalenz\EbayApi\Events\Notifications\ItemSoldEvent::class,
-            self::ITEM_ENDED => \Sashalenz\EbayApi\Events\Notifications\ItemEndedEvent::class,
-            self::ITEM_REVISED => \Sashalenz\EbayApi\Events\Notifications\ItemRevisedEvent::class,
-            self::FEEDBACK_RECEIVED => \Sashalenz\EbayApi\Events\Notifications\FeedbackReceivedEvent::class,
-            self::ORDER_CREATED => \Sashalenz\EbayApi\Events\Notifications\OrderCreatedEvent::class,
-            self::ORDER_CANCELLED => \Sashalenz\EbayApi\Events\Notifications\OrderCancelledEvent::class,
-            self::MARKETPLACE_ACCOUNT_DELETION => \Sashalenz\EbayApi\Events\Notifications\MarketplaceAccountDeletionEvent::class,
-            self::BUYER_REQUESTED_PURCHASE_QUOTE => \Sashalenz\EbayApi\Events\Notifications\BuyerRequestedPurchaseQuoteEvent::class,
-            self::ITEM_AVAILABILITY => \Sashalenz\EbayApi\Events\Notifications\ItemAvailabilityEvent::class,
+            self::ITEM_LISTED => ItemListedEvent::class,
+            self::ITEM_SOLD => ItemSoldEvent::class,
+            self::ITEM_ENDED => ItemEndedEvent::class,
+            self::ITEM_REVISED => ItemRevisedEvent::class,
+            self::FEEDBACK_RECEIVED => FeedbackReceivedEvent::class,
+            self::ORDER_CREATED => OrderCreatedEvent::class,
+            self::ORDER_CANCELLED => OrderCancelledEvent::class,
+            self::MARKETPLACE_ACCOUNT_DELETION => MarketplaceAccountDeletionEvent::class,
+            self::BUYER_REQUESTED_PURCHASE_QUOTE => BuyerRequestedPurchaseQuoteEvent::class,
+            self::ITEM_AVAILABILITY => ItemAvailabilityEvent::class,
             default => null,
         };
     }

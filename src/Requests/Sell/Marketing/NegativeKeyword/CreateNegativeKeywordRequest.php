@@ -39,7 +39,7 @@ class CreateNegativeKeywordRequest extends Request
         return $this->negativeKeywordData;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return NegativeKeywordData::class;
     }

@@ -56,7 +56,7 @@ class CreateTaskRequest extends Request
         return $body;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return TaskData::class;
     }

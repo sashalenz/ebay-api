@@ -56,8 +56,26 @@ class FetchItemAspectsRequest extends Request
     public function headers(): array
     {
         return [
-            'Accept-Encoding' => 'gzip',
+            'Accept-Encoding' => 'application/gzip',
         ];
+    }
+
+    protected ?string $filter = null;
+
+    public function filter(string $filter): self
+    {
+        $this->filter = $filter;
+
+        return $this;
+    }
+
+    public function query(): array
+    {
+        if ($this->filter !== null) {
+            return ['filter' => $this->filter];
+        }
+
+        return [];
     }
 
     /**

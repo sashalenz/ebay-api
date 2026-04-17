@@ -36,7 +36,7 @@ class CreateAdGroupRequest extends Request
         return $this->adGroupData;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return AdGroupData::class;
     }

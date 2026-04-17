@@ -7,6 +7,7 @@ namespace Sashalenz\EbayApi\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Sashalenz\EbayApi\Enums\NotificationEventType;
 use Sashalenz\EbayApi\Exceptions\InvalidNotificationSignatureException;
 use Sashalenz\EbayApi\Jobs\ProcessEbayNotificationJob;
 use Sashalenz\EbayApi\Models\EbayNotification;
@@ -80,7 +81,7 @@ class NotificationController
                 // Dispatch event directly
                 $eventData = $parser->extractEventData($data['event_name'], $data['payload']);
 
-                $eventType = \Sashalenz\EbayApi\Enums\NotificationEventType::tryFrom($data['event_name']);
+                $eventType = NotificationEventType::tryFrom($data['event_name']);
                 $eventClass = $eventType?->getEventClass();
 
                 if ($eventClass) {

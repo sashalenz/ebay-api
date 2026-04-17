@@ -37,7 +37,7 @@ class GetDefaultCategoryTreeIdRequest extends Request
      */
     public function endpoint(): string
     {
-        return '/commerce/taxonomy/v1/get_default_category_tree_id';
+        return '/commerce/taxonomy/v1/get_default_category_tree_id/'.$this->marketplaceId->value;
     }
 
     /**

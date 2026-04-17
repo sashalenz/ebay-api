@@ -59,7 +59,7 @@ class GetStoreTasksRequest extends Request
         return $query;
     }
 
-    protected function dto(): ?string
+    public function dto(): ?string
     {
         return StoreTasksData::class;
     }

@@ -24,6 +24,8 @@ use Sashalenz\EbayApi\Requests\Sell\Inventory\Offer\CreateOfferRequest;
 use Sashalenz\EbayApi\Requests\Sell\Inventory\Offer\GetListingFeesRequest;
 use Sashalenz\EbayApi\Requests\Sell\Inventory\Offer\UpdateOfferRequest;
 use Sashalenz\EbayApi\Requests\Sell\Inventory\ProductCompatibility\CreateOrReplaceProductCompatibilityRequest;
+use Sashalenz\EbayApi\Tests\Factories\InventoryItemDataFactory;
+use Sashalenz\EbayApi\Tests\Factories\OfferDataFactory;
 
 // Basic ValidationException Tests
 it('ValidationException can be created with errors', function () {
@@ -237,7 +239,7 @@ it('BulkCreateOrReplaceInventoryItemRequest accepts exactly 25 items', function 
     $request = BulkCreateOrReplaceInventoryItemRequest::make();
 
     for ($i = 1; $i <= 25; $i++) {
-        $item = \Sashalenz\EbayApi\Tests\Factories\InventoryItemDataFactory::make(['sku' => "SKU-{$i}"]);
+        $item = InventoryItemDataFactory::make(['sku' => "SKU-{$i}"]);
         $request->addRequest("SKU-{$i}", $item);
     }
 
@@ -263,7 +265,7 @@ it('BulkCreateOfferRequest validates max 25 offers', function () {
     $request = BulkCreateOfferRequest::make();
 
     for ($i = 1; $i <= 26; $i++) {
-        $offer = \Sashalenz\EbayApi\Tests\Factories\OfferDataFactory::make(['offerId' => "offer-{$i}"]);
+        $offer = OfferDataFactory::make(['offerId' => "offer-{$i}"]);
         $request->addOffer($offer);
     }
 
